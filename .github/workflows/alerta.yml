@@ -1,1 +1,25 @@
+name: Alerta CI ntfy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Ejecutar Hola Mundo
+        run: node index.js
+
+      - name: Enviar notificacion
+        run: |
+          curl -X POST https://ntfy.sh/devops-itla \
+          -H "Title: Nuevo push realizado" \
+          -H "Priority: default" \
+          -d "Se subio nuevo codigo al repositorio"
 
